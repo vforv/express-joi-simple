@@ -30,7 +30,6 @@ app.post('register',Validate(schema), (req: any, res: any) => {
     })
 })
 
-// Router will only work if this PR is accepted: https://github.com/expressjs/express/pull/3713#issuecomment-412275954
 app.use('/login', router);
 
 app.listen(3000, () => {

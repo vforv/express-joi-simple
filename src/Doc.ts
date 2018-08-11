@@ -2,6 +2,7 @@
 import * as Swagger from 'swagger-json';
 import * as SwaggerUi from 'swagger-ui-express';
 import * as fs from 'fs';
+import { regexpToPath } from './helper';
 
 export function Doc(app: any, info?: any) {
     Swagger.swaggerDoc.createJsonDoc(info);
@@ -24,7 +25,7 @@ export function Doc(app: any, info?: any) {
                     stack.forEach((routeMehtod: any) => {
                         if (routeMehtod.name == 'validateRequest') {
                             const joiSchema = routeMehtod.handle('schemaBypass');
-                            Swagger.swaggerDoc.addNewRoute(joiSchema, middleware.prefix + path, routeMehtod.method)
+                            Swagger.swaggerDoc.addNewRoute(joiSchema, regexpToPath(middleware.regexp) + path, routeMehtod.method)
                         }
                     })
                 }
