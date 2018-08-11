@@ -60,8 +60,13 @@ const settings = {
         }
     },
     host: 'localhost:3000',
-    basePath: '/'
+    basePath: '/',
+    documentaionPath: /doc
 }
 ```
 
 Doc(app, settings);
+
+Default documentation path is: /
+
+So you can find documentation: localhost:3000/

@@ -12,5 +12,6 @@ export const settings = {
         }
     },
     host: 'localhost:3000',
-    basePath: '/'
+    basePath: '/',
+    documentationPath: '/doc'
 }

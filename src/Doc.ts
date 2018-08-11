@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import { regexpToPath } from './helper';
 
 export function Doc(app: any, settings?: any) {
-    const {info, host, basePath} = settings;
+    const {info, host, basePath, documentationPath} = settings;
 
     Swagger.swaggerDoc.createJsonDoc(info, host, basePath);
 
@@ -42,5 +42,7 @@ export function Doc(app: any, settings?: any) {
 
     const swaggerDocument = fs.readFileSync('./swagger.json', 'utf8');
 
-    app.use('/doc', SwaggerUi.serve, SwaggerUi.setup(JSON.parse(swaggerDocument)));
+    let docPath = documentationPath || '/';
+
+    app.use(docPath, SwaggerUi.serve, SwaggerUi.setup(JSON.parse(swaggerDocument)));
 }
