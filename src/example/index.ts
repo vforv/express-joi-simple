@@ -1,7 +1,7 @@
 import * as express from 'express';
-import { factory } from '../index';
 import { router } from './router';
 import * as joi from 'joi';
+import { Doc, Validate } from '../index';
 
 const app = express();
 
@@ -11,7 +11,7 @@ const schema = {
     }
 }
 
-app.post('register',factory.validateJoiSchema(schema), (req, res) => {
+app.post('register',Validate(schema), (req: any, res: any) => {
     res.json({
         message: 'register'
     })
@@ -20,6 +20,5 @@ app.post('register',factory.validateJoiSchema(schema), (req, res) => {
 app.use('/login', router);
 
 app.listen(3000, () => {
-    factory.generateDoc(app);
-    console.log('App started on port 3000')
+    Doc(app);
 })

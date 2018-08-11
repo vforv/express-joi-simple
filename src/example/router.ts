@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { factory } from '../index';
+import { Validate } from '../index';
 import * as joi from 'joi';
 
-export const router = Router();
+export const router: any = Router();
 
 const schema = {
     body: {
@@ -10,6 +10,6 @@ const schema = {
     }
 }
 
-router.post('/test', factory.validateJoiSchema(schema), (req, res) => {
+router.post('/test', Validate(schema), (req: any, res: any) => {
     res.json({ message: 'test' });
 })

@@ -1,3 +1,2 @@
-import { ExpressJoiSimple } from './express-joi-simple';
-
-export const factory = new ExpressJoiSimple();
+export * from './Doc';
+export * from './Validate';
