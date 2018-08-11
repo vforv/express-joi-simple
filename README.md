@@ -7,30 +7,32 @@
 
 ```npm i express-joi-simple --save```
 
-## Example
+## Minimal Working Example
 
 ```
 import * as express from 'express';
-import { router } from './router';
 import * as joi from 'joi';
-import { Doc, Validate } from 'express-joi-simple';
+import * as BodyParser from 'body-parser';
+import { Doc, Validate, RequestHandler } from 'express-joi-simple';
 
 const app = express();
+app.use(BodyParser.json());
 
 const schema = {
     body: {
         test1: joi.string().required()
-    }
+    },
+    model: 'Register'
 }
 
 // Note middleware here
-app.post('register',Validate(schema), (req: any, res: any) => {
+app.post('register', Validate(schema), (req: any, res: any) => {
     res.json({
         message: 'register'
     })
 })
 
-app.use('/login', router);
+app.use(RequestHandler);
 
 app.listen(3000, () => {
     // Note function Doc here
@@ -39,3 +41,4 @@ app.listen(3000, () => {
 ```
 
 Use require instead of import for plain Javascript.
+More complicated example you can find in example folder.

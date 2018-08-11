@@ -18,8 +18,13 @@ export function Doc(app: any, info?: any) {
                     }
                 })
             }
-        } else if (middleware.name === 'router') { // router middleware
+        } else if (middleware.name === 'router' && middleware.handle.stack) { // router middleware
+            
             middleware.handle.stack.forEach((handler: any) => {
+                if(!handler.route) {
+                    return;
+                }
+
                 const { path, stack } = handler.route;
                 if (path) {
                     stack.forEach((routeMehtod: any) => {
@@ -35,5 +40,5 @@ export function Doc(app: any, info?: any) {
 
     const swaggerDocument = fs.readFileSync('./swagger.json', 'utf8');
 
-    app.use('/', SwaggerUi.serve, SwaggerUi.setup(JSON.parse(swaggerDocument)));
+    app.use('/doc', SwaggerUi.serve, SwaggerUi.setup(JSON.parse(swaggerDocument)));
 }
