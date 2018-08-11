@@ -3,6 +3,7 @@ import { router } from './router';
 import * as BodyParser from 'body-parser';
 import * as joi from 'joi';
 import { Doc, Validate, RequestHandler } from '../index';
+import { settings } from './settings';
 
 const app = express();
 app.use(BodyParser.json());
@@ -26,5 +27,5 @@ app.use('/login', router);
 
 app.use(RequestHandler);
 app.listen(3000, () => {
-    Doc(app);
+    Doc(app, settings);
 })

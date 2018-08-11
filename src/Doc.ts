@@ -4,8 +4,10 @@ import * as SwaggerUi from 'swagger-ui-express';
 import * as fs from 'fs';
 import { regexpToPath } from './helper';
 
-export function Doc(app: any, info?: any) {
-    Swagger.swaggerDoc.createJsonDoc(info);
+export function Doc(app: any, settings?: any) {
+    const {info, host, basePath} = settings;
+
+    Swagger.swaggerDoc.createJsonDoc(info, host, basePath);
 
     app._router.stack.forEach((middleware: any) => {
         if (middleware.route) { // routes registered directly on the app
